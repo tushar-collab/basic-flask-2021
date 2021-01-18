@@ -1,0 +1,26 @@
+import random
+class company:
+    def __init__(self,price):
+        self.share_price = price
+        self.ret = 0
+    def buy(self,qty):
+        self.share_price += 0.00005*self.share_price
+    def sell(self,qty):
+        self.share_price -= 0.00005*self.share_price
+    def trade(self,cost,misc,sell):
+        self.ret = sell - (cost + misc)
+        if self.ret <= 0 :
+            cost = cost - 10
+        else:
+            cost = cost + 10
+        return cost
+
+        
+msft = company(100)
+for i in range(1000):
+    if(random.random() < 0.3):
+        msft.sell(0)
+    else:
+        msft.buy(0)
+print(msft.share_price)
+print(msft.trade(msft.share_price,15,120))
